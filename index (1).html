@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View and prove your immigration status – GOV.UK</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, Helvetica, sans-serif; background: #ffffff; color: #0b0c0c; line-height: 1.5; }
+
+  /* GOV.UK black header */
+  .govuk-header { background: #0b0c0c; border-bottom: 10px solid #1d70b8; padding: 8px 0; }
+  .govuk-header-inner { max-width: 960px; margin: 0 auto; padding: 0 15px; display: flex; align-items: center; justify-content: space-between; }
+  .govuk-header-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .crown { width: 36px; height: 30px; }
+  .govuk-header-text { color: #ffffff; font-size: 28px; font-weight: 700; letter-spacing: 0.5px; }
+  .govuk-header-service { color: #ffffff; font-size: 17px; font-weight: 700; text-decoration: none; }
+  .govuk-header-service:hover { text-decoration: underline; }
+
+  .govuk-phase-banner { max-width: 960px; margin: 0 auto; padding: 10px 15px; border-bottom: 1px solid #b1b4b6; font-size: 15px; }
+  .govuk-tag { background: #1d70b8; color: #fff; font-size: 13px; font-weight: 700; padding: 2px 8px; margin-right: 8px; letter-spacing: 0.5px; }
+
+  .main { max-width: 960px; margin: 0 auto; padding: 30px 15px 60px; }
+  .main-narrow { max-width: 620px; margin: 0 auto; padding: 40px 15px 60px; }
+
+  h1 { font-size: 36px; margin-bottom: 24px; }
+  h2 { font-size: 24px; margin: 32px 0 12px; }
+  p.lede { font-size: 19px; margin-bottom: 20px; }
+  p { font-size: 17px; margin-bottom: 14px; }
+
+  /* Forms */
+  .govuk-form-group { margin-bottom: 24px; }
+  label { display: block; font-weight: 700; font-size: 19px; margin-bottom: 6px; }
+  .govuk-hint { font-size: 15px; color: #505a5f; margin-bottom: 6px; }
+  .govuk-input { width: 100%; max-width: 460px; padding: 10px; font-size: 17px; border: 2px solid #0b0c0c; border-radius: 0; }
+  .govuk-input:focus { outline: 3px solid #fd0; outline-offset: 0; box-shadow: inset 0 0 0 2px; }
+
+  .govuk-button { background: #00703c; color: #fff; border: none; padding: 12px 24px; font-size: 19px; font-weight: 400; cursor: pointer; box-shadow: 0 2px 0 #002d18; }
+  .govuk-button:hover { background: #005a30; }
+  .govuk-button-secondary { background: #f3f2f1; color: #0b0c0c; box-shadow: 0 2px 0 #929191; border: none; }
+
+  /* Error */
+  .govuk-error-summary { border: 4px solid #d4351c; padding: 16px 20px; margin-bottom: 28px; }
+  .govuk-error-summary h2 { color: #d4351c; font-size: 21px; margin: 0 0 8px; }
+  .govuk-error-summary a { color: #d4351c; font-weight: 700; font-size: 17px; }
+  .govuk-form-group-error .govuk-input { border: 4px solid #d4351c; }
+  .govuk-error-message { color: #d4351c; font-weight: 700; font-size: 15px; margin: 4px 0 6px; }
+
+  /* Status panel + photo */
+  .status-top { display: flex; gap: 24px; align-items: stretch; margin: 24px 0; }
+  .status-panel { background: #00703c; color: #ffffff; padding: 24px 28px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .status-panel h2 { color: #fff; margin: 0 0 6px; font-size: 27px; }
+  .status-panel p { color: #fff; font-size: 19px; margin: 0; }
+  .photo-card { width: 130px; background: #f3f2f1; border: 1px solid #b1b4b6; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+  .photo-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .status-sub { background: #f3f2f1; border-left: 10px solid #00703c; padding: 16px 20px; margin: 20px 0; }
+  .status-sub p { font-size: 19px; }
+
+  /* Summary list */
+  .govuk-summary-list { border-top: 1px solid #b1b4b6; margin: 20px 0 32px; }
+  .govuk-summary-list-row { display: flex; border-bottom: 1px solid #b1b4b6; }
+  .govuk-summary-list-key { width: 40%; padding: 12px 16px 12px 0; font-weight: 700; font-size: 17px; }
+  .govuk-summary-list-value { width: 60%; padding: 12px 0; font-size: 17px; }
+
+  .blue-box { background: #f4f8fb; border-left: 10px solid #1d70b8; padding: 16px 20px; margin: 24px 0; font-size: 17px; }
+
+  .links-list { list-style: none; margin: 8px 0 24px; }
+  .links-list li { font-size: 19px; margin-bottom: 10px; }
+  a { color: #1d70b8; }
+  a:hover { color: #003078; }
+
+  /* Share code */
+  .code-panel { border: 2px solid #0b0c0c; background: #f3f2f1; padding: 32px 28px; margin: 24px 0; text-align: center; }
+  .code-panel .code-label { font-size: 15px; color: #505a5f; margin-bottom: 8px; }
+  .code-value { font-family: "Courier New", monospace; font-size: 44px; font-weight: 700; letter-spacing: 6px; color: #0b0c0c; }
+  .code-expiry { margin-top: 14px; font-size: 16px; }
+  .steps { margin: 12px 0 24px 22px; font-size: 17px; }
+  .steps li { margin-bottom: 10px; }
+
+  /* Footer */
+  .govuk-footer { background: #f3f2f1; border-top: 1px solid #b1b4b6; padding: 30px 15px; margin-top: 40px; }
+  .govuk-footer-inner { max-width: 960px; margin: 0 auto; font-size: 15px; color: #0b0c0c; }
+  .govuk-footer-inner a { color: #0b0c0c; margin-right: 24px; }
+  .footer-meta { color: #505a5f; margin-top: 14px; font-size: 14px; }
+
+  /* PROP watermark — delete this block + the div in the body to remove */
+  .prop-tag { position: fixed; bottom: 8px; right: 8px; background: rgba(11,12,12,0.55); color: #fff; font-size: 11px; padding: 3px 8px; letter-spacing: 1px; z-index: 999; }
+
+  .hidden { display: none; }
+  .signout-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .signout-row a { font-size: 17px; }
+  .back-link { font-size: 15px; display: inline-block; margin-bottom: 18px; }
+
+  @media (max-width: 640px) {
+    .status-top { flex-direction: column-reverse; }
+    .photo-card { width: 130px; height: 165px; }
+    .code-value { font-size: 30px; letter-spacing: 3px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- GOV.UK header -->
+<header class="govuk-header">
+  <div class="govuk-header-inner">
+    <a class="govuk-header-logo" href="#">
+      <svg class="crown" viewBox="0 0 36 30" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M17.6 3.7l1.9-3.1 1.8 3.1c.2.3.5.4.8.4h-5.3c.3 0 .6-.2.8-.4zm9.9 5.6l-4.2-1.3c-.3-.1-.5-.3-.6-.6l-1.1-4.1c-.1-.5-.8-.5-.9 0l-1.1 4.1c-.1.3-.3.5-.6.6l-4.2 1.3c-.5.2-.5.9.1 1l4.4.4c.3 0 .5.2.6.5l1.4 4.1c.2.5.9.5 1.1 0l1.4-4.1c.1-.3.3-.5.6-.5l4.4-.4c.5-.1.6-.8.1-1z"/>
+        <path d="M35.5 12.4l-6.4-.6c-.5-.1-1.5-.7-1.8-1.1l-2.3-2.9c-.4-.5-1.3-.5-1.7 0L21 10.7c-.3.4-1.3 1-1.8 1.1l-6.4.6c-.7.1-.9 1-.4 1.4l4.9 4.2c.3.3.5.9.4 1.4l-1.5 6.2c-.2.7.6 1.2 1.2.8l5.5-3.3c.4-.3 1.2-.3 1.6 0l5.5 3.3c.6.4 1.4-.1 1.2-.8l-1.5-6.2c-.1-.5.1-1.1.4-1.4l4.9-4.2c.5-.4.3-1.3-.4-1.4zM19.8 20.3c-.2.1-.4 0-.5-.1l-4.2-2.5c-.2-.1-.3-.4-.2-.6l1.1-4.8c0-.2.2-.4.4-.4l4.9-.5c.2 0 .4.1.5.3l1.8 4.6c.1.2 0 .4-.1.6l-3.7 3.4zm12.2-6.2c.2-.1.3-.3.2-.6l-1.1-4.8c0-.2-.2-.4-.4-.4l-4.9-.5c-.2 0-.4.1-.5.3l-1.8 4.6c-.1.2 0 .4.1.6l3.1 2.8c.2.2.5.2.7 0l4.6-2z"/>
+      </svg>
+      <span class="govuk-header-text">GOV.UK</span>
+    </a>
+    <a class="govuk-header-service" href="#">View and prove your immigration status</a>
+  </div>
+</header>
+
+<div class="govuk-phase-banner">
+  <span class="govuk-tag">BETA</span>
+  This is a new service – your <a href="#">feedback</a> will help us to improve it.
+</div>
+
+<!-- ============ LOGIN VIEW ============ -->
+<div id="login-view" class="main-narrow">
+  <div id="error-summary" class="govuk-error-summary hidden">
+    <h2>There is a problem</h2>
+    <a href="#email">Your email address or password is incorrect</a>
+  </div>
+
+  <h1>Sign in</h1>
+  <p class="lede">Sign in with the email address and password you used when you created your account.</p>
+
+  <form id="login-form" novalidate>
+    <div class="govuk-form-group" id="email-group">
+      <label for="email">Email address</label>
+      <span class="govuk-error-message hidden" id="email-error">Enter your email address</span>
+      <input class="govuk-input" id="email" name="email" type="email" autocomplete="email">
+    </div>
+
+    <div class="govuk-form-group" id="password-group">
+      <label for="password">Password</label>
+      <span class="govuk-error-message hidden" id="password-error">Enter your password</span>
+      <input class="govuk-input" id="password" name="password" type="password" autocomplete="current-password">
+    </div>
+
+    <button type="submit" class="govuk-button">Sign in</button>
+  </form>
+
+  <h2>Problems signing in</h2>
+  <p><a href="#">I have forgotten my password</a></p>
+  <p><a href="#">I have forgotten my email address</a></p>
+  <p><a href="#">I have not used this service before</a></p>
+</div>
+
+<!-- ============ STATUS VIEW ============ -->
+<div id="status-view" class="main hidden">
+
+  <div class="signout-row">
+    <span style="font-size:15px;color:#505a5f;">Signed in as chbelkacem12@gmail.com</span>
+    <a href="#" id="signout-link">Sign out</a>
+  </div>
+
+  <h1>View and prove your immigration status</h1>
+
+  <div class="status-top">
+    <div class="status-panel">
+      <h2>Belkacem CHEMLAL</h2>
+      <p>Your immigration status is active</p>
+    </div>
+    <div class="photo-card">
+      <img id="holder-photo" src="data:image/jpeg;base64,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" alt="Visa holder photo"
+           onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22130%22 height=%22165%22><rect width=%22130%22 height=%22165%22 fill=%22%23dee0e2%22/><circle cx=%2265%22 cy=%2260%22 r=%2226%22 fill=%22%23b1b4b6%22/><ellipse cx=%2265%22 cy=%22145%22 rx=%2244%22 ry=%2236%22 fill=%22%23b1b4b6%22/></svg>';">
+    </div>
+  </div>
+
+  <div class="status-sub">
+    <p><strong>Your eVisa is valid from 11 September 2022 to 10 September 2027.</strong></p>
+  </div>
+
+  <h2>Your eVisa</h2>
+  <p>An eVisa is an online record of your immigration status and the conditions of your permission to enter or stay in the UK.</p>
+  <p>You do not need a physical document to prove your status.</p>
+
+  <div class="blue-box">
+    To prove your status to others, you can <strong>generate a share code</strong>. The code is valid for 90 days.
+  </div>
+
+  <p><a href="#" id="get-share-code" style="font-size:19px;">Get a share code to prove your status</a></p>
+
+  <h2>Your details</h2>
+  <dl class="govuk-summary-list">
+    <div class="govuk-summary-list-row">
+      <dt class="govuk-summary-list-key">Name</dt>
+      <dd class="govuk-summary-list-value">Belkacem CHEMLAL</dd>
+    </div>
+    <div class="govuk-summary-list-row">
+      <dt class="govuk-summary-list-key">Date of birth</dt>
+      <dd class="govuk-summary-list-value">2 December 1995</dd>
+    </div>
+    <div class="govuk-summary-list-row">
+      <dt class="govuk-summary-list-key">Nationality</dt>
+      <dd class="govuk-summary-list-value">Algerian</dd>
+    </div>
+    <div class="govuk-summary-list-row">
+      <dt class="govuk-summary-list-key">Current passport or travel document number</dt>
+      <dd class="govuk-summary-list-value">313478052</dd>
+    </div>
+    <div class="govuk-summary-list-row">
+      <dt class="govuk-summary-list-key">Type of permission</dt>
+      <dd class="govuk-summary-list-value">Work visa — Skilled Worker</dd>
+    </div>
+    <div class="govuk-summary-list-row">
+      <dt class="govuk-summary-list-key">Valid from</dt>
+      <dd class="govuk-summary-list-value">11 September 2022</dd>
+    </div>
+    <div class="govuk-summary-list-row">
+      <dt class="govuk-summary-list-key">Valid until</dt>
+      <dd class="govuk-summary-list-value">10 September 2027</dd>
+    </div>
+    <div class="govuk-summary-list-row">
+      <dt class="govuk-summary-list-key">Conditions</dt>
+      <dd class="govuk-summary-list-value">Work permitted. No recourse to public funds.</dd>
+    </div>
+    <div class="govuk-summary-list-row">
+      <dt class="govuk-summary-list-key">Application reference</dt>
+      <dd class="govuk-summary-list-value">UKVI-84T2-KX91Q</dd>
+    </div>
+  </dl>
+
+  <h2>Update your details</h2>
+  <ul class="links-list">
+    <li><a href="#">Update your passport or travel document details</a></li>
+    <li><a href="#">Add or update your identity document</a></li>
+    <li><a href="#">View your application history</a></li>
+  </ul>
+</div>
+
+<!-- ============ SHARE CODE VIEW ============ -->
+<div id="share-view" class="main-narrow hidden">
+  <div class="signout-row">
+    <span style="font-size:15px;color:#505a5f;">Signed in as chbelkacem12@gmail.com</span>
+    <a href="#" id="signout-link-2">Sign out</a>
+  </div>
+
+  <a href="#" class="back-link" id="back-to-status">&lt; Back to your immigration status</a>
+
+  <h1>Prove your immigration status to someone else</h1>
+  <p class="lede">You can give this code to someone who needs to check your immigration status, for example an employer or a landlord.</p>
+
+  <h2>Your share code</h2>
+  <div class="code-panel">
+    <div class="code-label">SHARE CODE</div>
+    <div class="code-value" id="share-code">····-····</div>
+    <div class="code-expiry" id="code-expiry"></div>
+  </div>
+
+  <h2>How someone checks your status</h2>
+  <ol class="steps">
+    <li>Go to the "Check someone's immigration status" service on GOV.UK.</li>
+    <li>Enter the share code and your date of birth (2 December 1995).</li>
+    <li>They will then see your name, photograph, and the type and length of your permission to be in the UK.</li>
+  </ol>
+
+  <div class="blue-box">
+    The code is valid for <strong>90 days</strong>. You can generate a new code at any time — the old one will stop working.
+  </div>
+
+  <button class="govuk-button" id="new-code-btn">Generate a new code</button>
+  <button class="govuk-button govuk-button-secondary" id="back-btn" style="margin-left:10px;">Back to your status</button>
+</div>
+
+<!-- GOV.UK footer -->
+<footer class="govuk-footer">
+  <div class="govuk-footer-inner">
+    <a href="#">Help</a>
+    <a href="#">Privacy</a>
+    <a href="#">Cookies</a>
+    <a href="#">Accessibility statement</a>
+    <a href="#">Contact</a>
+    <a href="#">Terms and conditions</a>
+    <div class="footer-meta">All content is available under the Open Government Licence v3.0, except where otherwise stated</div>
+  </div>
+</footer>
+
+<div class="prop-tag">FILM PROP — NOT AN OFFICIAL GOV.UK SERVICE</div>
+
+<script>
+  var VALID_EMAIL = "chbelkacem12@gmail.com";
+  var VALID_PASSWORD = "Belkacem0212@";
+
+  var form = document.getElementById("login-form");
+  var errorSummary = document.getElementById("error-summary");
+  var currentCode = null;
+
+  function showView(id) {
+    ["login-view", "status-view", "share-view"].forEach(function (v) {
+      document.getElementById(v).classList.add("hidden");
+    });
+    document.getElementById(id).classList.remove("hidden");
+    window.scrollTo(0, 0);
+  }
+
+  // --- Share code ---
+  function generateCode() {
+    var chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    function part(n) {
+      var s = "";
+      for (var i = 0; i < n; i++) s += chars[Math.floor(Math.random() * chars.length)];
+      return s;
+    }
+    currentCode = part(4) + "-" + part(4);
+    document.getElementById("share-code").textContent = currentCode;
+
+    var d = new Date();
+    d.setDate(d.getDate() + 90);
+    var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    document.getElementById("code-expiry").textContent =
+      "Valid until " + d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
+  }
+
+  // --- Login ---
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var email = document.getElementById("email").value.trim().toLowerCase();
+    var password = document.getElementById("password").value;
+
+    errorSummary.classList.add("hidden");
+    document.getElementById("email-group").classList.remove("govuk-form-group-error");
+    document.getElementById("password-group").classList.remove("govuk-form-group-error");
+    document.getElementById("email-error").classList.add("hidden");
+    document.getElementById("password-error").classList.add("hidden");
+
+    var valid = true;
+    if (!email) {
+      document.getElementById("email-group").classList.add("govuk-form-group-error");
+      document.getElementById("email-error").classList.remove("hidden");
+      valid = false;
+    }
+    if (!password) {
+      document.getElementById("password-group").classList.add("govuk-form-group-error");
+      document.getElementById("password-error").classList.remove("hidden");
+      valid = false;
+    }
+    if (!valid) return;
+
+    if (email === VALID_EMAIL && password === VALID_PASSWORD) {
+      showView("status-view");
+    } else {
+      errorSummary.classList.remove("hidden");
+      document.getElementById("email-group").classList.add("govuk-form-group-error");
+      document.getElementById("password-group").classList.add("govuk-form-group-error");
+      errorSummary.scrollIntoView();
+    }
+  });
+
+  // --- Navigation ---
+  document.getElementById("get-share-code").addEventListener("click", function (e) {
+    e.preventDefault();
+    generateCode();
+    showView("share-view");
+  });
+  document.getElementById("new-code-btn").addEventListener("click", generateCode);
+  document.getElementById("back-to-status").addEventListener("click", function (e) { e.preventDefault(); showView("status-view"); });
+  document.getElementById("back-btn").addEventListener("click", function () { showView("status-view"); });
+
+  ["signout-link", "signout-link-2"].forEach(function (id) {
+    document.getElementById(id).addEventListener("click", function (e) {
+      e.preventDefault();
+      showView("login-view");
+      form.reset();
+    });
+  });
+</script>
+</body>
+</html>
